@@ -1,0 +1,19 @@
+# For more info on HTTP files go to https://aka.ms/vs/httpfile
+@host = http://localhost:5006
+@CodeSectorVariety=003
+@CodeLabel=001
+@TypeProduct=1
+@CodePallett=P10001
+@NumberBoxes=108
+@UserId=2150e333-8fdc-42a3-9474-1a3956d46de8
+
+POST {{host}}/printedlabels
+Content-Type: application/json
+{
+  "CodeSectorVariety":"{{CodeSectorVariety}}",
+  "CodeLabel":"{{CodeLabel}}",
+  "TypeProduct":"{{TypeProduct}}",
+  "CodePallet":"{{CodePallett}}",
+  "NumberBoxes":"{{NumberBoxes}}",
+  "UserId":"{{userId}}"
+}
