@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PrintLabelsPacking.Application.Services;
 using PrintLabelsPacking.Contracts.Labels;
+using MediatR;
+using PrintLabelsPacking.Application.PrintedLabels.Commands.CreatePrintedLabels;
 
 namespace PrintLabelsPacking.Api.Controllers
 {
@@ -8,20 +10,28 @@ namespace PrintLabelsPacking.Api.Controllers
     [Route("[controller]")]
     public class PrintedLabelsController : ControllerBase
     {
-        private readonly IPrintedLabelService _praintedLabelService;
+        //private readonly IPrintedLabelWriteService _praintedLabelService;
+        private readonly Mediator _mediator;
 
-        public PrintedLabelsController(IPrintedLabelService praintedLabelService)
+        //public PrintedLabelsController(IPrintedLabelWriteService praintedLabelService)
+        public PrintedLabelsController(Mediator mediator)
         {
-            _praintedLabelService = praintedLabelService;
+            //_praintedLabelService = praintedLabelService;
+            _mediator = mediator;
         }
 
         [HttpPost]
         public IActionResult CreatedPrintedLabels(CreatePrintedLabelsRequest request)
         {
+            /*
             var createdPrintedLabelId= _praintedLabelService.CreatedPrintedLabels(
                 request.CodeSectorVariety, request.CodeLabel, request.TypeProduct.ToString(), request.CodePallet, request.NumberBoxes, request.UserId);
+            */
 
-            var response = new CreatePrintedLabelsResponse(createdPrintedLabelId, request.TypeProduct);
+            var command = new CreatePrintedLabelCommand(
+                request.CodeSectorVariety, request.CodeLabel, request.TypeProduct.ToString(), request.CodePallet, request.NumberBoxes, request.UserId);
+
+            //var response = new CreatePrintedLabelsResponse(createdPrintedLabelId, request.TypeProduct);
             return Ok(response); // creates an OKObject that produces an status code 200 Ok
         }
     }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PrintLabelsPacking.Application.Services
 {
-    public class PrintedLabelService : IPrintedLabelService
+    public class PrintedLabelWriteService : IPrintedLabelWriteService
     {
         public Guid CreatedPrintedLabels(string CodeSectorVariety, string CodeLabel, string TypeProduct, string CodePallet, int NumberBoxes, Guid UserId)
         {

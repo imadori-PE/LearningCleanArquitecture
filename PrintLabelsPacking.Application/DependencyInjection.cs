@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
+using PrintLabelsPacking.Application.Services;
 
-namespace PrintLabelsPacking.Application.Services
+namespace PrintLabelsPacking.Application
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddAplication( this IServiceCollection services)
+        public static IServiceCollection AddAplication(this IServiceCollection services)
         {
-            services.AddScoped<IPrintedLabelService, PrintedLabelService>();
+            services.AddScoped<IPrintedLabelWriteService, PrintedLabelWriteService>();
             return services;
         }
     }

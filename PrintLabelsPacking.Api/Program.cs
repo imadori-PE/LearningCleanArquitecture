@@ -1,4 +1,4 @@
-using PrintLabelsPacking.Application.Services;
+using PrintLabelsPacking.Application;
 using PrintLabelsPacking.Infraestructure;
 
 var builder = WebApplication.CreateBuilder(args); //utiliza el patrón de inyección de dependencias 
