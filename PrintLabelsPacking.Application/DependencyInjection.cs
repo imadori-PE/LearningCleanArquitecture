@@ -10,11 +10,23 @@ namespace PrintLabelsPacking.Application
 {
     public static class DependencyInjection
     {
+        /*
+         * Para que el manejador funcione correctamente y el patrón CQRS con MediatR sea efectivo en tu aplicación, 
+         * es necesario registrar los servicios en el contenedor de dependencias de ASP.NET Core. Esto se hace implementando 
+         * un método de extensión como el que has mostrado, llamado AddAplication
+         */
         public static IServiceCollection AddAplication(this IServiceCollection services)
         {
-            services.AddScoped<IPrintedLabelWriteService, PrintedLabelWriteService>();
+            //services.AddScoped<IPrintedLabelWriteService, PrintedLabelWriteService>();
+            services.AddMediatR(options =>
+            {
+                options.RegisterServicesFromAssemblyContaining(typeof(DependencyInjection));
+            });
+
             return services;
         }
+
+        
     }
 }
 

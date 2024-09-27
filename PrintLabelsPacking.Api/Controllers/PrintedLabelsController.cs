@@ -11,17 +11,17 @@ namespace PrintLabelsPacking.Api.Controllers
     public class PrintedLabelsController : ControllerBase
     {
         //private readonly IPrintedLabelWriteService _praintedLabelService;
-        private readonly Mediator _mediator;
+        private readonly ISender _mediator;
 
         //public PrintedLabelsController(IPrintedLabelWriteService praintedLabelService)
-        public PrintedLabelsController(Mediator mediator)
+        public PrintedLabelsController(ISender mediator)
         {
             //_praintedLabelService = praintedLabelService;
             _mediator = mediator;
         }
 
         [HttpPost]
-        public IActionResult CreatedPrintedLabels(CreatePrintedLabelsRequest request)
+        public async Task<ActionResult> CreatedPrintedLabels(CreatePrintedLabelsRequest request)
         {
             /*
             var createdPrintedLabelId= _praintedLabelService.CreatedPrintedLabels(
@@ -31,7 +31,9 @@ namespace PrintLabelsPacking.Api.Controllers
             var command = new CreatePrintedLabelCommand(
                 request.CodeSectorVariety, request.CodeLabel, request.TypeProduct.ToString(), request.CodePallet, request.NumberBoxes, request.UserId);
 
-            //var response = new CreatePrintedLabelsResponse(createdPrintedLabelId, request.TypeProduct);
+           var createdPrintedLabelId = await _mediator.Send(command); //sends a request
+
+            var response = new CreatePrintedLabelsResponse(createdPrintedLabelId, request.TypeProduct);
             return Ok(response); // creates an OKObject that produces an status code 200 Ok
         }
     }
